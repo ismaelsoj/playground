@@ -5,9 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import org.joda.time.LocalDateTime;
 
 public class DateTimeManipulator {
 	
@@ -16,7 +14,7 @@ public class DateTimeManipulator {
 		/*
 		 * Essa é a data que vem do banco
 		 */
-		Date now = sdf.parse("09/02/2019 00:00:00");
+		Date now = sdf.parse("08/02/2019 00:00:00");
 		/*
 		 * Recupera a diferença em milissegundos entre a data com nosso TimeZone e UTC
 		 */
@@ -47,10 +45,11 @@ public class DateTimeManipulator {
 			 * A data a ser levada em consideração nos cálculos de dripping é 
 			 * a soma entre o horário UTC e a diferença do TimeZone atual.
 			 * 
-			 * Ou seja: dateByTimeZone > liberationDate? Se sim, libera o conteúdo, senão, espera
+			 * Ou seja: dateByTimeZone >= liberationDate? Se sim, libera o conteúdo, senão, espera
 			 */
 			Date dateByTimeZone = new Date(utcDate.getTime() + offset);
 			System.out.println("Horário em " + string + ": " + sdf.format(dateByTimeZone));
+			System.out.println("Estaria liberado? " + (dateByTimeZone.getTime() >= now.getTime()));
 		}
 		
 	}
